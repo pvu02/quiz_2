@@ -56,3 +56,4 @@ my.plot <- my.plot + labs(title="", x="Agreeableness", y="Extraversion")
 print(my.plot)
 
 ggsave("Figure1.pdf", plot=my.plot, width=6,height=6)
+
