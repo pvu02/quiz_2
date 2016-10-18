@@ -5,13 +5,12 @@ library(apaTables)
 library(dplyr)
 bfi_data <- psych::bfi
 
-categorical_variables <- select(bfi_data, gender)
+categorical_variables <- select(bfi_data, gender, education)
 categorical_variables$gender <- as.factor(categorical_variables$gender)
-levels(categorical_variables$gender) <- list("Male"=1,"Female"=2)
-
-categorical_variables <- select(bfi_data, education)
 categorical_variables$education <- as.factor(categorical_variables$education)
+levels(categorical_variables$gender) <- list("Male"=1, "Female"=2)
 levels(categorical_variables$education) <- list("HS"=1,"finished HS"=2,"some college"=3,"college graduate"=4,"graduate degree"=5)
+
 
 agreeableness <- select (bfi_data, A1,A2,A3,A4,A5)
 extraversion <- select (bfi_data, E1,E2,E3,E4,E5)
@@ -37,3 +36,5 @@ agreeableness <- psych::alpha(as.data.frame(agreeableness),check.keys=FALSE)$sco
 extraversion <- psych::alpha(as.data.frame(extraversion),check.keys=FALSE)$scores
 neuroticism <- psych::alpha(as.data.frame(neuroticism),check.keys=FALSE)$scores
 analytic_data <- cbind(categorical_variables,age,agreeableness,extraversion,neuroticism)
+
+write_csv(analytic_data,path="analytic_data.csv")
