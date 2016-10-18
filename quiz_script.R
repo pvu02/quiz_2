@@ -46,3 +46,14 @@ analytic_data_male <- filter (analytic_data_male, age>40)
 write_csv(analytic_data_male,path="analytic_data_male.csv")
 
 apa.cor.table(analytic_data_male, filename="Table2.doc", table.number=2)
+
+my.plot <- qplot(agreeableness,extraversion, data=analytic_data_male)
+my.plot <- my.plot + theme_classic()
+my.plot <- my.plot + theme(axis.line.x = element_line(colour = 'black', size=0.5, linetype='solid'),
+                           axis.line.y = element_line(colour = 'black', size=0.5, linetype = 'solid'))
+my.plot <- my.plot + labs(title="", x="Agreeableness", y="Extraversion")
+my.plot <- my.plot + geom_smooth(method = "lm", se = FALSE, color="black")
+
+print(my.plot)
+
+ggsave("Figure1.pdf", plot=my.plot, width=6,height=6)
